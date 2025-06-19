@@ -1,0 +1,44 @@
+<matches>
+    <match>
+        <name>Match 1</name>
+        <date>2024-01-01</date>
+        <firstteam>Team 1</firstteam>
+        <secondteam>Team 2</secondteam>
+        <area>Whitefield</area>
+    </match>
+    <match>
+        <name>Match 2</name>
+        <date>2023-01-02</date>
+        <firstteam>Team 3</firstteam>
+        <secondteam>Team 4</secondteam>
+        <area>Hoodi</area>
+    </match>
+    <match>
+        <name>Match 3</name>
+        <date>2026-01-03</date>
+        <firstteam>Team 1</firstteam>
+        <secondteam>Team 3</secondteam>
+        <area>Sarajapura</area>
+    </match>
+    <match>
+        <name>Match 4</name>
+        <date>2027-01-03</date>
+        <firstteam>Team 2</firstteam>
+        <secondteam>Team 4</secondteam>
+        <area>Whitefield</area>
+    </match>
+    <match>
+        <name>Match 5</name>
+        <date>2025-07-10</date>
+        <firstteam>Team 1</firstteam>
+        <secondteam>Team 4</secondteam>
+        <area>Hoodi</area>
+    </match>
+    <match>
+        <name>Match 6</name>
+        <date>1984-05-28</date>
+        <firstteam>Team 2</firstteam>
+        <secondteam>Team 3</secondteam>
+        <area>Sarajapura</area>
+    </match>
+</matches>

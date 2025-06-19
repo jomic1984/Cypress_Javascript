@@ -1,0 +1,50 @@
+<players>
+    <player>
+        <name>Player 1</name>
+        <dob>2000-01-01</dob>
+        <email>Player1@example.com</email>
+        <contact>9876543210</contact>
+        <gender>MALE</gender>
+        <team>Team 1</team>
+    </player>
+    <player>
+        <name>Player 2</name>
+        <dob>1995-01-02</dob>
+        <email>Player2@example.com</email>
+        <contact>8123456789</contact>
+        <gender>FEMALE</gender>
+        <team>Team 2</team>
+    </player>
+    <player>
+        <name>Player 3</name>
+        <dob>1999-01-03</dob>
+        <email>Player3@example.com</email>
+        <contact>6999999999</contact>
+        <gender>OTHER</gender>
+        <team>Team 3</team> 
+    </player>
+    <player>
+        <name>Player 4</name>
+        <dob>2001-01-03</dob>
+        <email>Player4@example.com</email>
+        <contact>9345678901</contact>
+        <gender>MALE</gender>
+        <team>Team 2</team>
+    </player>
+    <player>
+        <name>Player 5</name>
+        <dob>2005-07-10</dob>
+        <email>Player5@example.com</email>
+        <contact>8888888888</contact>
+        <gender>FEMALE</gender>
+        <team>Team 4</team>
+    </player>
+    <player>
+        <name>Player 6</name>
+        <dob>2006-05-28</dob>
+        <email>Player6@example.com</email>
+        <contact>6789012345</contact>
+        <gender>FEMALE</gender>
+        <team>Team 3</team>
+    </player>
+</players>
