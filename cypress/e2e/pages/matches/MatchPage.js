@@ -1,5 +1,6 @@
 import commonSelectors from "../../page_objects/common/CommonSelectors";
 import matchSelectors from "../../page_objects/matches/MatchSelectors";
+
 class MatchPage {
 
     // Method to visit the Match page
