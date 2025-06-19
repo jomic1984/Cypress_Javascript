@@ -1,5 +1,14 @@
 # Cypress_Javascript
 
+Sample Project Setup:
+
+Sample Project Path: Google Drive (josephqaautomation@gmail.com) - File Name: SampleProject.zip (https://drive.google.com/file/d/1R4UUOLo7gGB7MhZHLLJyjNiztIkcSNDl/view?usp=drive_link)
+
+	Unzip the sample project and 2 folders will have individual read me file.
+	Follow the steps mentioned in the Readme file.
+	Start first Backend application and then go for Frontend application.
+	Install Mango DB before you start installing the application.
+
 Covered Modules:
 
 	1. Areas.
