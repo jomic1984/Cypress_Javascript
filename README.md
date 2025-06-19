@@ -1,72 +1,86 @@
-# Cypress_Javascript
 
-Sample Project Setup:
+# Cypress JavaScript Automation Project
 
-Sample Project Path: Google Drive (josephqaautomation@gmail.com) - File Name: SampleProject.zip (https://drive.google.com/file/d/1R4UUOLo7gGB7MhZHLLJyjNiztIkcSNDl/view?usp=drive_link)
+## 📁 Sample Project Setup
 
-	Unzip the sample project and 2 folders will have individual read me file.
-	Follow the steps mentioned in the Readme file.
-	Start first Backend application and then go for Frontend application.
-	Install Mango DB before you start installing the application.
+- 📦 **Sample Project Path:**  
+  [Google Drive - SampleProject.zip](https://drive.google.com/file/d/1R4UUOLo7gGB7MhZHLLJyjNiztIkcSNDl/view?usp=drive_link)  
+  *(Google Drive — josephqaautomation@gmail.com)*
 
-Covered Modules:
+- 📂 **Instructions:**
+  1. Download and unzip the project.
+  2. Each of the two folders inside contains its own `README.md` — follow the instructions provided within.
+  3. Start the **Backend** application first, then the **Frontend**.
+  4. Ensure **MongoDB** is installed before proceeding.
 
-	1. Areas.
-	2. Matches.
-	3. Players.
-	4. Teams.
+---
 
-Test Strategy:
+## 🧩 Covered Modules
 
-	1. Individually tested each modules.
+1. Areas  
+2. Matches  
+3. Players  
+4. Teams
 
-	2. Followed POM framework such that under e2e folder 3 sub-folders will be presented (page_objects / page / tests).
+---
 
-	3. page_objects folder consists of only the objects of the elements based on the module.
+## ✅ Test Strategy
 
-	4. page folder will have the methods and functions specific to the modules.
+1. Each module is **individually tested**.
+2. Implemented a **Page Object Model (POM)** structure with:
+   - `e2e/page_objects`: UI element selectors
+   - `e2e/page`: Reusable methods and module-specific logic
+   - `e2e/tests`: Test specifications for each module
+3. **UI validations** tested field-by-field across modules.
+4. **End-to-end** scenarios are covered.
+5. **Edge case** testing is included.
+6. **Known bug cases** are intentionally tested to confirm failures.
+7. **Mochawesome HTML reports** generated at:
+   ```
+   /cypress/reports/html
+   ```
+8. **Video recordings** of failed test cases stored at:
+   ```
+   /cypress/reports/html/videos
+   ```
+9. Some scenarios involve **API-based data creation** using JSON/XML files.
+10. Loaded **1000+ player records** to validate large dataset handling.
 
-	5. tests folder will have the spec files specific to the modules.
+---
 
-	6. Individually tested the UI validations for each fields in each Modules.
+## 🧪 Edge Case Scenarios (Known Failures: 7 Test Cases)
 
-	7. Covered End-2-End Scenario.
+1. **Areas Module:** Allows duplicate area names.  
+   👉 Should validate uniqueness by area name.
 
-	8. Edge Case scenario has also been covered in the testcases.
+2. **Matches Module:** Permits duplicate match entries for same teams and date.  
+   👉 Should validate by match name, teams, and date combination.
 
-	9. Have created the test case which would potentially fail because of the bug in the application.
+3. **Players Module:** 
+   - `Team` field not mandatory in UI, but required in API.  
+     ➤ Causes script error when omitted.
+   - Email validation allows `@` but not a `.` after it.  
+     ➤ Add full format validation.
+   - Accepts future dates in `Date of Birth`.  
+     ➤ Validate against current date.
+   - Allows full duplicate player entries.  
+     ➤ Uniqueness can be enforced via mobile number.
 
-	10. created the html report - ..cypress\reports\html. Have used mochawesome report generator.
+4. **Teams Module:** Allows duplicate team names.  
+   👉 Should enforce uniqueness on team name at creation.
 
-	11. Video recordings for the failure testcases will be stored - ..cypress\reports\html\videos\
+---
 
-	12. For some of the scenarios used API calls for creating the data by using XML and JSON files.
+## 🚀 Running Automation Test Scripts
 
-	13. Loaded Player data of 1000 count to check the application response
-
-Edge-Case scenarios for which I failed the 7 test cases:
-
-	1. In Areas module the application is allowing the user to create the same data multiple times. Which is logically wrong. We can validate by Area name.
-
-	2. In Matches module the application is allowing the user to create multiple matches with the same Match name , with the same team on the same date, which is wrong. We can validate this by Match name and its row properties.
-
-	3. In Players module in the UI "Team" field is not marked as mandatory, but as per the API calls it is mandatory. So If I not update the field and click on Add button the application is giving me the script error.
-
-	4. Also in the players module for the Email validation '@' symbol is being validated but '.' is not validated after the '@' symbol. We need to add '.' parameter in the application.
-
-	5. In the players module the application is allowing to update the future date for the Date of birth which is logically wrong. We can validate this by comparing the current date with the date entered.
-
-	6. In Players module the application is allowing for the duplicate of players with exact data. We can validate by using Mobile number.
-
-	7. In Teams module the application is allowing user to create the same team name multiple times. We can validate this by comparing the team name with the exisitng team name after we click the Add button.
-
-
-Running of Automation Test Scripts:
-
-	1. Unzip the file.
-	2. Open the folder in Visual Studio Code.
-	3. Open a new terminal
-	4. Type this command in the terminal - npm install
-	5. Type this command in the terminal - npx cypress run --headed --browser chrome
-
-
+1. Unzip the project.
+2. Open the folder using **Visual Studio Code**.
+3. Open a new terminal.
+4. Run:
+   ```bash
+   npm install
+   ```
+5. Execute tests:
+   ```bash
+   npx cypress run --headed --browser chrome
+   ```
