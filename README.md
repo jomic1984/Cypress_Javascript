@@ -35,12 +35,6 @@ Test Strategy:
 
 	13. Loaded Player data of 1000 count to check the application response
 
-Test Outputs:
-
-	Total Testcases Covered: 38
-	Passing 	       : 31
-	Failure		       : 7
-
 Edge-Case scenarios for which I failed the 7 test cases:
 
 	1. In Areas module the application is allowing the user to create the same data multiple times. Which is logically wrong. We can validate by Area name.
@@ -57,7 +51,6 @@ Edge-Case scenarios for which I failed the 7 test cases:
 
 	7. In Teams module the application is allowing user to create the same team name multiple times. We can validate this by comparing the team name with the exisitng team name after we click the Add button.
 
-Followed the setup of the application with the application UI url : http://localhost:3001/
 
 Running of Automation Test Scripts:
 
