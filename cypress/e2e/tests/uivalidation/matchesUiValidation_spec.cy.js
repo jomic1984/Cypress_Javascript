@@ -51,6 +51,81 @@ describe('Match Module UI Validation Tests', () => {
     })
   })
 
+  // This test case is to validate proper error message when mandatory fields are not filled
+  it('should show proper error message when mandatory fields are not filled', () => {
+    matchPage.visit()
+
+    // Not filling Match name
+    cy.contains('button', matchSelectors.AddMatchButton).click()
+    cy.get(commonSelectors.Date).type("2023-10-01")
+    cy.get(matchSelectors.EnterAreaName).select("Whitefield")
+    cy.get(matchSelectors.EnterFirstTeamName).select("Team 1")
+    cy.get(matchSelectors.EnterSecondTeamName).select("Team 2")
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+    cy.wait(1000)
+    cy.get(matchSelectors.EnterMatchName).then(($input) => {
+      const message = $input[0].validationMessage;
+      expect(message).to.eq('Please fill out this field.');
+    });
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+    // Not filling the Match Date
+    cy.contains('button', matchSelectors.AddMatchButton).click()
+    cy.get(matchSelectors.EnterMatchName).type("Match 1")
+    cy.get(matchSelectors.EnterAreaName).select("Whitefield")
+    cy.get(matchSelectors.EnterFirstTeamName).select("Team 1")
+    cy.get(matchSelectors.EnterSecondTeamName).select("Team 2")
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+    cy.wait(1000)
+    cy.get(commonSelectors.Date).then(($input) => {
+      const message = $input[0].validationMessage;
+      expect(message).to.eq('Please fill out this field.');
+    });
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+    // Not filling the Area drop down list
+    cy.contains('button', matchSelectors.AddMatchButton).click()
+    cy.get(matchSelectors.EnterMatchName).type("Match 1")
+    cy.get(commonSelectors.Date).type("2023-10-01")
+    cy.get(matchSelectors.EnterFirstTeamName).select("Team 1")
+    cy.get(matchSelectors.EnterSecondTeamName).select("Team 2")
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+    cy.wait(1000)
+    cy.get(matchSelectors.EnterAreaName).then(($input) => {
+      const message = $input[0].validationMessage;
+      expect(message).to.eq('Please select an item in the list.');
+    });
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+    // Not filling the First Team drop down list
+    cy.contains('button', matchSelectors.AddMatchButton).click()
+    cy.get(matchSelectors.EnterMatchName).type("Match 1")
+    cy.get(commonSelectors.Date).type("2023-10-01")
+    cy.get(matchSelectors.EnterAreaName).select("Whitefield")
+    cy.get(matchSelectors.EnterSecondTeamName).select("Team 2")
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+    cy.wait(1000)
+    cy.get(matchSelectors.EnterFirstTeamName).then(($input) => {
+      const message = $input[0].validationMessage;
+      expect(message).to.eq('Please select an item in the list.');
+    });
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+    // Not filling the Second Team drop down list
+    cy.contains('button', matchSelectors.AddMatchButton).click()
+    cy.get(matchSelectors.EnterMatchName).type("Match 1")
+    cy.get(commonSelectors.Date).type("2023-10-01")
+    cy.get(matchSelectors.EnterAreaName).select("Whitefield")
+    cy.get(matchSelectors.EnterFirstTeamName).select("Team 1")
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+    cy.wait(1000)
+    cy.get(matchSelectors.EnterSecondTeamName).then(($input) => {
+      const message = $input[0].validationMessage;
+      expect(message).to.eq('Please select an item in the list.');
+    });
+    cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+  })
+
   // This test case is to validate the match page UI elements
   it('should validate the match page', () => {
     cy.task('clearMongoDB')
@@ -74,4 +149,5 @@ describe('Match Module UI Validation Tests', () => {
       expect(actualHeadings).to.include.members(['MATCH NAME', 'MATCH DATE', 'TEAM A', 'TEAM B', 'AREA', 'ACTION']);
     });
   })
+  
 })

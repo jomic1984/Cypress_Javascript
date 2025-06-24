@@ -63,7 +63,9 @@ describe('Player Module UI Validation Tests', () => {
         playerPage.visit()
         playerPage.createPlayerUI("UIPlayerValidation", "1984-05-28", "2345678901", "MALE", "")
         cy.get(playerSelectors.Contact).then(($input) => {
+            const message = $input[0].validationMessage;
             expect($input[0].checkValidity()).to.be.false;
+            expect(message).to.eq('Please match the requested format.');
         });
     })
 
@@ -100,4 +102,55 @@ describe('Player Module UI Validation Tests', () => {
         playerPage.getPlayerList().should('contain', 'UI Player Validation 4')
 
     })
+
+    // This test case is to validate the tooltip or error message when we did not fill the mandatory fields
+    it('should show proper error message when mandatory fields are not filled', () => {
+        playerPage.visit()
+
+        // Not filling Name
+        cy.contains('button', playerSelectors.AddPlayerButton).click()
+        cy.get(commonSelectors.Date).type("1984-05-28")
+        cy.get(playerSelectors.Email).type("joseph@example.com")
+        cy.get(playerSelectors.Contact).type("8754432109")
+        cy.get(playerSelectors.Gender).select("MALE")
+        cy.get(playerSelectors.Team).select("Team 1")
+        cy.get(commonSelectors.PageFooter).find('button').contains('Add').click()
+        cy.wait(1000)
+        cy.get(playerSelectors.EnterPlayerName).then(($input) => {
+            const message = $input[0].validationMessage;
+            expect(message).to.eq('Please fill out this field.');
+        });
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+        // Not filling Date of birth
+        cy.contains('button', playerSelectors.AddPlayerButton).click()
+        cy.get(playerSelectors.EnterPlayerName).type("Joseph")
+        cy.get(playerSelectors.Email).type("joseph@example.com")
+        cy.get(playerSelectors.Contact).type("8754432109")
+        cy.get(playerSelectors.Gender).select("MALE")
+        cy.get(playerSelectors.Team).select("Team 1")
+        cy.get(commonSelectors.PageFooter).find('button').contains('Add').click()
+        cy.wait(1000)
+        cy.get(commonSelectors.Date).then(($input) => {
+            const message = $input[0].validationMessage;
+            expect(message).to.eq('Please fill out this field.');
+        });
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+        // Not filling Gender
+        cy.contains('button', playerSelectors.AddPlayerButton).click()
+        cy.get(playerSelectors.EnterPlayerName).type("Joseph")
+        cy.get(commonSelectors.Date).type("1984-05-28")
+        cy.get(playerSelectors.Email).type("joseph@example.com")
+        cy.get(playerSelectors.Contact).type("8754432109")
+        cy.get(playerSelectors.Team).select("Team 1")
+        cy.get(commonSelectors.PageFooter).find('button').contains('Add').click()
+        cy.wait(1000)
+        cy.get(playerSelectors.Gender).then(($input) => {
+            const message = $input[0].validationMessage;
+            expect(message).to.eq('Please select an item in the list.');
+        });
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+    });
+
 })

@@ -40,4 +40,44 @@ describe('Area Module UI Validation Tests', () => {
         })
     })
 
+    // This test case is to validate proper error message when mandatory fields are not filled
+    it('should show proper error message when mandatory fields are not filled', () => {
+        areaPage.visit()
+
+        // Not filling Area name
+        cy.contains('button', areaSelectors.AddAreaButton).click()
+        cy.get(areaSelectors.EnterStateName).type("Karnataka")
+        cy.get(areaSelectors.EnterCityName).type("Bangalore")
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+        cy.wait(1000)
+        cy.get(areaSelectors.EnterAreaName).then(($input) => {
+            const message = $input[0].validationMessage;
+            expect(message).to.eq('Please fill out this field.');
+        });
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+        // Not filling the State name
+        cy.contains('button', areaSelectors.AddAreaButton).click()
+        cy.get(areaSelectors.EnterAreaName).type("Whitefield")
+        cy.get(areaSelectors.EnterCityName).type("Bangalore")
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+        cy.wait(1000)
+        cy.get(areaSelectors.EnterStateName).then(($input) => {
+            const message = $input[0].validationMessage;
+            expect(message).to.eq('Please fill out this field.');
+        });
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+        // Not filling the City name
+        cy.contains('button', areaSelectors.AddAreaButton).click()
+        cy.get(areaSelectors.EnterAreaName).type("Whitefield")
+        cy.get(areaSelectors.EnterStateName).type("Karnataka")
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+        cy.wait(1000)
+        cy.get(areaSelectors.EnterCityName).then(($input) => {
+            const message = $input[0].validationMessage;
+            expect(message).to.eq('Please fill out this field.');
+        });
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+    })
 })

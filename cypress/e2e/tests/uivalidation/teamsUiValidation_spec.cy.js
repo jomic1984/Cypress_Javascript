@@ -35,4 +35,22 @@ describe('Team Module UI Validation Tests', () => {
             expect(count).to.be.equals(1)
         })
     })
+
+    // This will validate the for proper information when Add button is clicked without any information
+    it('should show proper error message when mandatory fields are not filled', () => {
+        teamPage.visit()
+
+        // Not filling Team name
+        cy.contains('button', teamSelectors.AddTeamButton).click()
+        cy.get(teamSelectors.EnterTeamName).clear()
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.AddButton).click()
+
+        cy.wait(1000)
+        cy.get(teamSelectors.EnterTeamName).then(($input) => {
+            const message = $input[0].validationMessage;
+            expect(message).to.eq('Please fill out this field.');
+        });
+        cy.get(commonSelectors.PageFooter).find('button').contains(commonSelectors.CancelButton).click()
+
+    })
 })
